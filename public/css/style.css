@@ -1,0 +1,39 @@
+.menu{
+	display: block;
+	width: 300px;
+	height:100%;
+	border:1px solid black;
+	position: absolute;
+}
+.bookstwomenu{
+	display: none;
+	padding-left: 10px;
+	padding-top: 10px;
+
+}
+.bookstwomenu a{
+	text-decoration: none;
+		color:blue;
+}
+.authortowmenu{
+	display: none;
+	padding-left: 10px;
+	padding-top: 10px;
+
+}
+.authortowmenu a{
+	text-decoration: none;
+		color:blue;
+}
+.content{
+	display: block;
+	margin-left:302px;
+	height:100%;
+	border:1px solid red;
+}
+.updatebookstable td{
+	border: 1px solid black;
+}
+.updatebookssave{
+	margin-left:20px;
+}

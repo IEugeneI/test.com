@@ -14,3 +14,32 @@
 Route::get('/', function () {
     return view('welcome');
 });
+/*Route::get('/admin', function () {
+    return view('admin');
+});*/
+Route::get('/admin/addbook', 'BooksController@show');
+Route::post('/admin/addbook', [
+    'uses' => 'BooksController@added'
+  ]);
+
+
+Route::match(['get','post'],'/admin/updatebook', 'BooksController@update');
+
+Route::match(['get','post'],'/admin/deletebook', 'BooksController@delete');
+
+Auth::routes();
+
+Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/admin/addauthor', 'AuthorsController@show');
+
+Route::post('/admin/addauthor', [
+    'uses' => 'AuthorsController@added'
+  ]);
+Route::match(['get','post'],'/admin/updateauthor', 'AuthorsController@update');
+Route::get('/admin/updateauthor/{id}', 'AuthorsController@showupdateform');
+Route::post('/admin/updateauthor/{id}', 'AuthorsController@update');
+Route::get('/admin/deleteauthor', 'AuthorsController@deleteform');
+Route::get('/admin/deleteauthor/{id}', 'AuthorsController@delete');
+
+
+
