@@ -15,7 +15,7 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
+                
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -62,14 +62,46 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .updatebookstable td{
+                border: 1px solid black;
+                color:black;
+            }
         </style>
     </head>
     <body>
+             <?php
+        if (isset($info)){
+           echo "<table class='updatebookstable'>";
+            echo "<tr>";
+            echo "<td>ID</td>";
+            echo "<td>Author Name</td>";
+            echo "<td>Author Second Name</td>";
+            echo "<td>Author Last Name</td>";
+            echo "<td>Author Date Birthday</td>";
+            echo "<td>Book name</td>";
+            echo "<td>Book genre</td>";
+            echo "<td>Book publish_year</td>";
+            echo "</tr>";
+              foreach ($info as $value) {
+               echo "<td>$value->id</td>";
+               echo "<td>$value->authorname</td>";
+               echo "<td>$value->second_name</td>";
+               echo "<td>$value->last_name</td>";
+               echo "<td>$value->date_birth</td>";
+               echo "<td>$value->name</td>";
+               echo "<td>$value->genre</td>";
+               echo "<td>$value->publish_year</td>";
+               echo "</tr>";
+
+           }
+           echo "</table>";
+        }
+        ?>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/admin') }}">Home</a>
+                        <a href="{{ url('/admin') }}">Admin</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
@@ -79,5 +111,6 @@
 
             
         </div>
+   
     </body>
 </html>

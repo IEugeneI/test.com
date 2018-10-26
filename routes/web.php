@@ -11,12 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-/*Route::get('/admin', function () {
-    return view('admin');
-});*/
+
+Route::get('/', 'WelcomeController@show');
+
+
 Route::get('/admin/addbook', 'BooksController@show');
 Route::post('/admin/addbook', [
     'uses' => 'BooksController@added'
@@ -40,6 +38,7 @@ Route::get('/admin/updateauthor/{id}', 'AuthorsController@showupdateform');
 Route::post('/admin/updateauthor/{id}', 'AuthorsController@update');
 Route::get('/admin/deleteauthor', 'AuthorsController@deleteform');
 Route::get('/admin/deleteauthor/{id}', 'AuthorsController@delete');
-
+Route::match(['get','post'],'/admin/searchbook', 'BooksController@search');
+Route::match(['get','post'],'/admin/searchauthor', 'AuthorsController@search');
 
 

@@ -71,11 +71,40 @@ class BooksController extends Controller
     	
     	return view('adminpanell.deletebook',["books"=>$books,"authors"=>$authors]);
     	}
-
-
     	$books=Book::all();
-    	
     	return view('adminpanell.deletebook',["books"=>$books,"authors"=>$authors]);
     
+    }
+
+    public function search(Request $request){
+    		$info = DB::table('books')
+            ->join('author', 'books.author_id', '=', 'author.id')
+            ->select('books.*', 'author.name as authorname', 'author.second_name','author.last_name')
+            ->get();
+    	if ($request->isMethod('post')) {
+    		$find = DB::table('books')
+            ->join('author', 'books.author_id', '=', 'author.id')
+            ->select('books.*', 'author.name as authorname', 'author.second_name','author.last_name')
+            ->where('books.name','LIKE','%'.$request->input('search').'%')
+            ->orWhere('publish_year','LIKE','%'.$request->input('search').'%')
+            ->orWhere('genre','LIKE','%'.$request->input('search').'%')
+            ->orWhere('author.name','LIKE','%'.$request->input('search').'%')
+            ->orWhere('second_name','LIKE','%'.$request->input('search').'%')
+            ->orWhere('last_name','LIKE','%'.$request->input('search').'%')
+            ->get();
+
+            
+
+
+            return view('adminpanell.searchbook',["info"=>$info,"find"=>$find]);
+    	}
+
+
+
+    	$info = DB::table('books')
+            ->join('author', 'books.author_id', '=', 'author.id')
+            ->select('books.*', 'author.name as authorname', 'author.second_name','author.last_name')
+            ->get();
+    	return view('adminpanell.searchbook',["info"=>$info]);
     }
 }

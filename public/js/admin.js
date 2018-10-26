@@ -33,6 +33,24 @@
             }
         }
     });
+            jQuery('.searchmenu').click(function() {
+        $(this).data('clicked', true);
+    });
+          $('.searchmenu').on("click", function() {
+        if ($('.searchtwomenu').css('display') == 'none') {
+            $('.searchtwomenu').css('display', 'block');
+            $('.searchtwomenu').data('clicked', false);
+        } else {
+            if (jQuery('.searchtwomenu').data('clicked')) {
+                $('.searchtwomenu').css('display', 'block');
+                $('.searchtwomenu').data('clicked', false);
+            } else {
+                $('.searchtwomenu').css('display', 'none');
+            }
+        }
+    });
+
+
             jQuery('.buttonupdatebooks').click(function() {
         id = $(this).attr('data-id');
         name = $(this).attr('data-name');

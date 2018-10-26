@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Author;
 use URL;
+
 class AuthorsController extends Controller
 {
     //
@@ -13,9 +15,11 @@ class AuthorsController extends Controller
     	$this->middleware('auth');
 	}
 
+
 	public function show(){
 		return view('adminpanell.addauthor');
 	}
+
 
 	public function added(Request $request){
 		if ($request->isMethod('post')) {
@@ -29,6 +33,7 @@ class AuthorsController extends Controller
 			 return view('adminpanell.addauthor',["status"=>$status]);
 		}
 	}
+
 
 	public function update(Request $request){
 		if ($request->isMethod('post')) {
@@ -45,15 +50,18 @@ class AuthorsController extends Controller
 		return view('adminpanell.updateauthor',["authors"=>$authors]);
 	}
 
+
 	public function showupdateform($id){
 		$authors=Author::find($id);
 		return view('adminpanell.updateauthorform',["authors"=>$authors]);
 	}
 
+
 	public function deleteform(){
 		$authors=Author::all();
 		return view('adminpanell.deleteauthor',["authors"=>$authors]);
 	}
+
 
 	public function delete($id,Request $request){
 		if ($request->isMethod('get')) {
@@ -61,8 +69,31 @@ class AuthorsController extends Controller
 			$authors->delete();
 			$url=URL::to('/');
 			return redirect($url.'/admin/deleteauthor');
-
 		}
 		
+	}
+
+	public function search(Request $request){
+		$info = Author::all();
+		
+		$posts = Author::withCount('books')->get();
+		$i=1;
+		foreach ($posts as $post) {
+  			$countbook[$i] =$post->books_count;
+  			$i++;
+		}
+		if ($request->isMethod('post')) {
+			$name=$request->input('search');
+			$result=Author::where('name', 'LIKE', '%' . $name . '%')
+					->orWhere('second_name', 'LIKE', '%' . $name . '%')
+					->orWhere('last_name', 'LIKE', '%' . $name . '%')
+					->orWhere('date_birth', '=', '$name' )
+					->get();
+
+			return view('adminpanell.searchauthor',["info"=>$info,"count"=>$countbook,"result"=>$result]);
+		}
+		
+		
+		return view('adminpanell.searchauthor',["info"=>$info,"count"=>$countbook]);
 	}
 }

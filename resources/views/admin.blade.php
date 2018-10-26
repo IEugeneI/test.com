@@ -22,6 +22,10 @@
                 <li class="authortowmenu"><a href='<?=URL::to('/')?>/admin/updateauthor'>Редактировать</a></li>
                 <li class="authortowmenu"><a href='<?=URL::to('/')?>/admin/deleteauthor'>Удалить</a></li>
             </ul>
+            <ul class="searchmenu"><a href="#" >Поиск</a>
+                <li class="searchtwomenu"><a href="<?=URL::to('/')?>/admin/searchbook">Поиск книг</a></li>
+                <li class="searchtwomenu"><a href="<?=URL::to('/')?>/admin/searchauthor">Поиск авторов</a></li>
+            </ul>
         </ul>
         </div>
 

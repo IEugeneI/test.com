@@ -37,3 +37,13 @@
 .updatebookssave{
 	margin-left:20px;
 }
+.searchtwomenu{
+	display: none;
+	padding-left: 10px;
+	padding-top: 10px;
+
+}
+.searchtwomenu a{
+	text-decoration: none;
+		color:blue;
+}
